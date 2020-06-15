@@ -2,28 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
 import App from './components/App';
 import { Provider } from 'react-redux';
+import store from './store'
 
-const defaultState = {
-  appName: 'conduit',
-  articles: null
-};
-const reducer = function(state = defaultState, action){
-  switch(action.type){
-    case 'TOGGLE':
-      return {...state, checked: !state.checked};
-      default:
-      return state;
-  }
-};
-const store = createStore(reducer);
+import { Route, Redirect, HashRouter} from 'react-router-dom';
+import Home from './components/Home';
+import Login from './components/Login';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <HashRouter>
+        <Route path='/' component={App}>
+          <Redirect to='/home' />
+        </Route>
+        <Route path='/home' component={Home} />
+        <Route path='/login' component={Login} />
+      </HashRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
