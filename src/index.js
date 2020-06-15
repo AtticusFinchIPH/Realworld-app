@@ -1,12 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux';
+import App from './components/App';
+import { Provider } from 'react-redux';
+
+const defaultState = {
+  appName: 'conduit',
+  articles: null
+};
+const reducer = function(state = defaultState, action){
+  switch(action.type){
+    case 'TOGGLE':
+      return {...state, checked: !state.checked};
+      default:
+      return state;
+  }
+};
+const store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
