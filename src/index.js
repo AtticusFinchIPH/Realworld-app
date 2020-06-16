@@ -14,9 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <HashRouter>
-        <Route path='/' component={App}>
-          <Redirect to='/home' />
-        </Route>
+        <Route path='/' component={App} />
         <Route path='/home' component={Home} />
         <Route path='/login' component={Login} />
       </HashRouter>
